@@ -1,7 +1,7 @@
 {
   "name": "express-rest-shop",
   "version": "1.0.0",
-  "description": "Express REST Shop",
+  "description": "express-rest-shop",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/matthewbates/shop/issues"
   },
-  "homepage": "https://github.com/matthewbates/shop#readme"
+  "homepage": "https://github.com/matthewbates/shop#readme",
+  "dependencies": {
+    "mongoose": "^6.9.0",
+    "morgan": "^1.10.0"
+  }
 }
