@@ -3,7 +3,7 @@ const Product = require("../models/products.model");
 
 function getAllProducts(req, res, next) {
   Product.find()
-    // .exec()
+    .exec()
     .then((docs) => {
       console.log(docs);
       res.status(200).json(docs);

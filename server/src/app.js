@@ -1,12 +1,19 @@
 // express handles middleware and routing
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const ordersRouter = require("./routes/orders.router");
 const productsRouter = require("./routes/products.router");
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 // funnel all requests through middleware
 app.use(morgan("dev"));

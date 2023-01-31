@@ -5,7 +5,9 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || 8000;
 
 const MONGO_URL =
-  "mongodb+srv://express-rest-shop:4CaVa97CtF1v7nez@shop.gywsnm9.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://express-rest-shop:" +
+  process.env.MONGO_ATLAS_PW +
+  "@shop.gywsnm9.mongodb.net/?retryWrites=true&w=majority";
 
 const server = http.createServer(app);
 
@@ -23,7 +25,7 @@ mongoose.connection.on("error", (err) => {
 });
 
 async function startServer() {
-  mongoose.connect(MONGO_URL);
+  await mongoose.connect(MONGO_URL);
 }
 
 server.listen(PORT, () => {
