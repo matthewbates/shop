@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { httpGetProducts } from "./requests";
 
 export default function useProducts() {
   const [products, setProducts] = useState([]);
 
-  async function getProducts() {
-    // await loading the entire array of product objects
+  const getProducts = useCallback(async () => {
     const fetchedProducts = await httpGetProducts();
-    // set the products array
     setProducts(fetchedProducts);
-  }
+  }, []);
+
+  // optional workaround without useCallback hook
+  //   async function getProducts() {
+  //     const fetchedProducts = await httpGetProducts();
+  //     setProducts(fetchedProducts);
+  //   }
 
   useEffect(() => {
     // invoke getProducts - only needs to happen once
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   return products;
 }
