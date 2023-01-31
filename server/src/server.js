@@ -9,10 +9,15 @@ const MONGO_URL =
 
 const server = http.createServer(app);
 
+// eliminates soft error on server startup
+mongoose.set("strictQuery", false);
+
+// ensures mongo connection is successful
 mongoose.connection.once("open", () => {
   console.log("MongoDB connection ready!");
 });
 
+// captures server connection errors
 mongoose.connection.on("error", (err) => {
   console.error(err);
 });
