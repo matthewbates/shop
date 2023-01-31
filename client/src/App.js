@@ -10,8 +10,7 @@ export default function App() {
       {products.map((product, _id) => (
         <ul key={product._id}>
           <li key={product.index}>
-            <strong>Name:</strong> {product.name} <strong>Price:</strong>
-            {product.price}
+            <strong>Name:</strong> {product.name}
           </li>
         </ul>
       ))}
