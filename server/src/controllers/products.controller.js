@@ -10,13 +10,12 @@ function getAllProducts(req, res, next) {
     .exec()
     .then((model) => {
       console.log(model);
-      res.status(200).json(model);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
+      res
+        .status(200)
+        .json(model)
+        .catch((err) => {
+          console.log(err);
+        });
     });
 }
 
