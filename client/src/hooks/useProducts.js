@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { httpGetProducts } from "./requests";
 
-export default function useProducts() {
+const useProducts = () => {
   const [products, setProducts] = useState([]);
 
   const getProducts = useCallback(async () => {
@@ -21,4 +21,6 @@ export default function useProducts() {
   }, [getProducts]);
 
   return products;
-}
+};
+
+export default useProducts;
