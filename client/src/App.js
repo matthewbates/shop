@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import useProducts from "./hooks/useProducts";
 
 export default function App() {
-  const products = useProducts();
-  console.log(products);
+  const fetchedProducts = useProducts();
+  const mappedProducts = fetchedProducts.products;
+  console.log(mappedProducts);
 
   return (
     <div>
-      {products.map((product, _id) => (
-        <ul key={product._id}>
-          <li key={product.index}>
-            <strong>Name:</strong> {product.name}
-          </li>
+      {mappedProducts.map((item, _id) => (
+        <ul>
+          <li key={_id}>{item.name}</li>
         </ul>
       ))}
     </div>

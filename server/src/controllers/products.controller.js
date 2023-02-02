@@ -7,15 +7,20 @@ const Product = require("../models/products.model");
 // GET /products
 function getAllProducts(req, res, next) {
   Product.find()
+    .select("_id name price")
     .exec()
     .then((model) => {
-      console.log(model);
-      res
-        .status(200)
-        .json(model)
-        .catch((err) => {
-          console.log(err);
-        });
+      const response = {
+        count: model.length,
+        products: model,
+      };
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
     });
 }
 
@@ -29,7 +34,7 @@ function getOneProduct(req, res, next) {
       item
         ? res.status(200).json(item)
         : res.status(404).json({
-            message: "Could not find product by provided ID`",
+            message: "Could not find product by provided ID",
           });
     })
     .catch((err) => {
@@ -46,7 +51,6 @@ function postNewProduct(req, res, next) {
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     price: req.body.price,
-    stocked: req.body.stocked,
   })
     .save()
     .then((result) => {
