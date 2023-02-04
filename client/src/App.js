@@ -1,18 +1,10 @@
 import React from "react";
 import useProducts from "./hooks/useProducts";
+import useOrders from "./hooks/useOrders";
 
 export default function App() {
   const fetchedProducts = useProducts();
-  const mappedProducts = fetchedProducts.products;
-  console.log(mappedProducts);
+  console.log(fetchedProducts);
 
-  return (
-    <div>
-      {mappedProducts.map((item, _id) => (
-        <ul>
-          <li key={_id}>{item.name}</li>
-        </ul>
-      ))}
-    </div>
-  );
+  return <div>App</div>;
 }

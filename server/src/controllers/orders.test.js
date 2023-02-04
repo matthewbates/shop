@@ -1,9 +1,8 @@
 const supertest = require("supertest");
 
-desrcibe("Groups CRUD tests together", () => {
+describe("Group CRUD tests together", () => {
   test("GET /orders is working as expected", () => {});
-  test("GET /orders/ordersId is working as expected", () => {});
+  test("GET /orders/orderID is working as expected", () => {});
   test("POST /orders is working as expected", () => {});
-  test("PATCH orders/ordersId is working as expected", () => {});
-  test("DELETE orders/ordersId is working as expectted", () => {});
+  test("DELETE /orders/orderId is working as expected", () => {});
 });

@@ -29,12 +29,11 @@ function getOneProduct(req, res, next) {
   id = req.params.productId;
   Product.findById(id)
     .exec()
-    .then((item) => {
-      console.log(item);
-      item
-        ? res.status(200).json(item)
+    .then((itemById) => {
+      itemById
+        ? res.status(200).json(itemById)
         : res.status(404).json({
-            message: "Could not find product by provided ID",
+            message: "Could not find item by ID ",
           });
     })
     .catch((err) => {
@@ -51,6 +50,7 @@ function postNewProduct(req, res, next) {
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     price: req.body.price,
+    stocked: req.body.stocked,
   })
     .save()
     .then((result) => {

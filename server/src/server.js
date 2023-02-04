@@ -9,7 +9,7 @@ const MONGO_URL =
   process.env.MONGO_ATLAS_PW +
   "@shop.gywsnm9.mongodb.net/?retryWrites=true&w=majority";
 
-  // creates a new server using express
+  // creates a new server using
 const server = http.createServer(app);
 
 // eliminates soft error on server startup
