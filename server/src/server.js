@@ -9,7 +9,7 @@ const MONGO_URL =
   process.env.MONGO_ATLAS_PW +
   "@shop.gywsnm9.mongodb.net/?retryWrites=true&w=majority";
 
-  // creates a new server using
+// creates a new server using
 const server = http.createServer(app);
 
 // eliminates soft error on server startup
@@ -34,5 +34,4 @@ server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
 });
 
-// invokes the startServer function
 startServer();
