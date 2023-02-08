@@ -9,10 +9,20 @@ function getAllProducts(req, res, next) {
   Product.find()
     .select("_id name price")
     .exec()
-    .then((model) => {
+    .then((docs) => {
       const response = {
-        count: model.length,
-        products: model,
+        count: docs.length,
+        products: docs.map((doc) => {
+          return {
+            _id: doc._id,
+            name: doc.name,
+            price: doc.price,
+            request: {
+              type: "GET",
+              url: `http://localhost:8000/products/${doc._id}`,
+            },
+          };
+        }),
       };
       res.status(200).json(response);
     })
@@ -28,6 +38,7 @@ function getAllProducts(req, res, next) {
 function getOneProduct(req, res, next) {
   id = req.params.productId;
   Product.findById(id)
+    .select("_id name price")
     .exec()
     .then((itemById) => {
       itemById
@@ -50,12 +61,12 @@ function postNewProduct(req, res, next) {
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     price: req.body.price,
-    stocked: req.body.stocked,
   })
     .save()
     .then((result) => {
       console.log(result);
       res.status(201).json({
+        message: "Created product successfully",
         createdProduct: result,
       });
     });

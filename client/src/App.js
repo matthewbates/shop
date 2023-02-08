@@ -1,10 +1,11 @@
 import React from "react";
-import useProducts from "./hooks/useProducts";
-import useOrders from "./hooks/useOrders";
+
+import AppLayout from "./pages/AppLayout";
 
 export default function App() {
-  const fetchedProducts = useProducts();
-  console.log(fetchedProducts);
-
-  return <div>App</div>;
+  return (
+    <div>
+      <AppLayout />
+    </div>
+  );
 }
