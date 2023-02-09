@@ -7,14 +7,14 @@ const Product = require("../models/products.model");
 // GET /products
 function getAllProducts(req, res, next) {
   Product.find()
-    .select("_id name price")
-    .exec()
-    .then((docs) => {
+    .select("_id name price") // only list id, name, and price
+    .exec() // execute search
+    .then((docs) => { // promise object that returns a response
       const response = {
         count: docs.length,
         products: docs.map((doc) => {
           return {
-            _id: doc._id,
+            id: doc._id,
             name: doc.name,
             price: doc.price,
             request: {
