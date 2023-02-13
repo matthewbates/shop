@@ -1,20 +1,31 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import useProducts from "../hooks/useProducts";
 
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
+import Home from "./Home";
+import Products from "./Products";
+
 export default function AppLayout() {
-  const fetchedProducts = useProducts();
-  const productsArray = fetchedProducts;
-  console.log(productsArray.products);
+  const products = useProducts();
 
   return (
     <div>
-      {productsArray.products.map((item, _id) => {
-        return (
-          <ul>
-            <li>{item.name}</li>
-          </ul>
-        );
-      })}
+      <Navbar />
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route
+            exact
+            path="/products"
+            element={<Products products={products} />}
+          />
+        </Routes>
+      </Router>
+      <Footer />
     </div>
   );
 }

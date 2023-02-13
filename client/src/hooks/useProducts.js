@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { httpGetProducts } from "./requests";
 
 const useProducts = () => {
@@ -9,11 +9,10 @@ const useProducts = () => {
     setProducts(fetchedProducts);
   }, []);
 
-  // optional workaround without useCallback hook
-  //   async function getProducts() {
-  //     const fetchedProducts = await httpGetProducts();
-  //     setProducts(fetchedProducts);
-  //   }
+  // async function getProducts() {
+  //   const fetchedProducts = await httpGetProducts();
+  //   setProducts(fetchedProducts);
+  // }
 
   useEffect(() => {
     // invoke getProducts - only needs to happen once

@@ -9,22 +9,23 @@ function getAllProducts(req, res, next) {
   Product.find()
     .select("_id name price") // only list id, name, and price
     .exec() // execute search
-    .then((docs) => { // promise object that returns a response
-      const response = {
-        count: docs.length,
-        products: docs.map((doc) => {
-          return {
-            id: doc._id,
-            name: doc.name,
-            price: doc.price,
-            request: {
-              type: "GET",
-              url: `http://localhost:8000/products/${doc._id}`,
-            },
-          };
-        }),
-      };
-      res.status(200).json(response);
+    .then((docs) => {
+      // promise object that returns a response
+      // const response = {
+      //   count: docs.length,
+      //   products: docs.map((doc) => {
+      //     return {
+      //       id: doc._id,
+      //       name: doc.name,
+      //       price: doc.price,
+      //       request: {
+      //         type: "GET",
+      //         url: `http://localhost:8000/products/${doc._id}`,
+      //       },
+      //     };
+      //   }),
+      // };
+      res.status(200).json(docs);
     })
     .catch((err) => {
       console.log(err);
