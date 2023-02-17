@@ -17,6 +17,8 @@ app.use(
 
 // funnel all requests through middleware
 app.use(morgan("dev"));
+// makes uploads folder available publicly
+app.use("/uploads", express.static("uploads"));
 // returns middleware that only parses urlencoded bodies
 app.use(bodyParser.urlencoded({ extended: false }));
 // returns middleware that only parses json

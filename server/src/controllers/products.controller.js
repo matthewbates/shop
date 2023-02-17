@@ -8,7 +8,7 @@ const Product = require("../models/products.model");
 // GET /products
 function getAllProducts(req, res, next) {
   Product.find()
-    .select("_id name price")
+    .select("_id name price productImage")
     .exec()
     .then((docs) => {
       const response = {
@@ -18,6 +18,7 @@ function getAllProducts(req, res, next) {
             id: doc._id,
             name: doc.name,
             price: doc.price,
+            productImage: doc.productImage,
             request: {
               type: "GET",
               url: `http://localhost:8000/products/${doc._id}`,
@@ -39,7 +40,7 @@ function getAllProducts(req, res, next) {
 function getOneProduct(req, res, next) {
   id = req.params.productId;
   Product.findById(id)
-    .select("_id name price")
+    .select("_id name price productImage")
     .exec()
     .then((itemById) => {
       itemById
@@ -64,11 +65,12 @@ function getOneProduct(req, res, next) {
 
 // POST /products
 function postNewProduct(req, res, next) {
-  console.log(req.file)
+  console.log(req.file);
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     price: req.body.price,
+    productImage: req.file.path,
   });
   product.save().then((result) => {
     console.log(result);
