@@ -1,4 +1,7 @@
 const express = require("express");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
 const productsController = require("../controllers/products.controller");
 
 const productsRouter = express.Router();
@@ -10,7 +13,11 @@ productsRouter.get("/", productsController.getAllProducts);
 productsRouter.get("/:productId", productsController.getOneProduct);
 
 // POST /products
-productsRouter.post("/", productsController.postNewProduct);
+productsRouter.post(
+  "/",
+  upload.single("productImage"),
+  productsController.postNewProduct
+);
 
 // PATCH /products/id
 productsRouter.patch("/:productId", productsController.updateOneProduct);

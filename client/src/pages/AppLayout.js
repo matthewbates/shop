@@ -18,11 +18,7 @@ export default function AppLayout() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route
-            exact
-            path="/products"
-            element={<Products products={products} />}
-          />
+          <Route path="/products" element={<Products products={products} />} />
         </Routes>
       </Router>
       <Footer />

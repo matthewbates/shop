@@ -2,30 +2,30 @@
 // docs for API query (.exec(), .then(), etc.): https://mongoosejs.com/docs/api/query.html
 
 const mongoose = require("mongoose");
+
 const Product = require("../models/products.model");
 
 // GET /products
 function getAllProducts(req, res, next) {
   Product.find()
-    .select("_id name price") // only list id, name, and price
-    .exec() // execute search
+    .select("_id name price")
+    .exec()
     .then((docs) => {
-      // promise object that returns a response
-      // const response = {
-      //   count: docs.length,
-      //   products: docs.map((doc) => {
-      //     return {
-      //       id: doc._id,
-      //       name: doc.name,
-      //       price: doc.price,
-      //       request: {
-      //         type: "GET",
-      //         url: `http://localhost:8000/products/${doc._id}`,
-      //       },
-      //     };
-      //   }),
-      // };
-      res.status(200).json(docs);
+      const response = {
+        count: docs.length,
+        products: docs.map((doc) => {
+          return {
+            id: doc._id,
+            name: doc.name,
+            price: doc.price,
+            request: {
+              type: "GET",
+              url: `http://localhost:8000/products/${doc._id}`,
+            },
+          };
+        }),
+      };
+      res.status(200).json(response);
     })
     .catch((err) => {
       console.log(err);
@@ -43,7 +43,13 @@ function getOneProduct(req, res, next) {
     .exec()
     .then((itemById) => {
       itemById
-        ? res.status(200).json(itemById)
+        ? res.status(200).json({
+            product: itemById,
+            request: {
+              type: "GET",
+              url: `http://localhost:8000/products`,
+            },
+          })
         : res.status(404).json({
             message: "Could not find item by ID ",
           });
@@ -58,19 +64,27 @@ function getOneProduct(req, res, next) {
 
 // POST /products
 function postNewProduct(req, res, next) {
+  console.log(req.file)
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     price: req.body.price,
-  })
-    .save()
-    .then((result) => {
-      console.log(result);
-      res.status(201).json({
-        message: "Created product successfully",
-        createdProduct: result,
-      });
+  });
+  product.save().then((result) => {
+    console.log(result);
+    res.status(201).json({
+      message: "Created product successfully",
+      createdProduct: {
+        name: result.name,
+        price: result.price,
+        id: result._id,
+        request: {
+          type: "POST",
+          url: `http://localhost:8000/products/${result._id}`,
+        },
+      },
     });
+  });
 }
 
 // PATCH /products/productId
@@ -85,8 +99,13 @@ function updateOneProduct(req, res, next) {
   Product.updateOne({ _id: id }, { $set: updateOps })
     .exec()
     .then((result) => {
-      console.log(result);
-      res.status(200).json(result);
+      res.status(200).json({
+        message: "Product updated",
+        request: {
+          type: "GET",
+          url: `http://localhost:8000/products/${id}`,
+        },
+      });
     })
     .catch((err) => {
       console.log(err);
