@@ -10,6 +10,7 @@ const storage = multer.diskStorage({
   },
 });
 
+// requires a file to be either a .jpeg or .png
 const fileFilter = (req, file, cb) => {
   if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
     // accept a file
@@ -20,6 +21,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+// defines file size upload limits
 const upload = multer({
   storage: storage,
   limits: {
