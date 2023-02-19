@@ -3,11 +3,7 @@ import { StyledBurger } from "./BurgerElements";
 
 export default function index({ open, toggle }) {
   return (
-    <StyledBurger
-      open={open}
-      onClick={toggle}
-      style={{ position: "fixed", top: "30px", left: "10px" }}
-    >
+    <StyledBurger open={open} onClick={toggle}>
       <div />
       <div />
       <div />

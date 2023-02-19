@@ -19,3 +19,10 @@ export const NavLinksWrapper = styled.div`
   margin-right: 2rem;
   color: white;
 `;
+
+export const SidebarWrapper = styled.div`
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: ${({ open }) => (open ? 1 : -1)};
+`;

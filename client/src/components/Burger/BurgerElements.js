@@ -11,6 +11,9 @@ export const StyledBurger = styled.div`
 
   @media screen and (max-width: 768px) {
     display: flex;
+    position: fixed;
+    top: 30px;
+    left: 10px;
   }
 
   div {
