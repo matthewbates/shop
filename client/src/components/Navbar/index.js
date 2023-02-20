@@ -19,9 +19,6 @@ export default function Navbar() {
       <NavlinksWrapper>
         <Navlinks title="home">Home</Navlinks>
         <Navlinks title="products">Products</Navlinks>
-        <Navlinks title="test">Test</Navlinks>
-        <Navlinks title="test">Test</Navlinks>
-        <Navlinks title="test">Test</Navlinks>
       </NavlinksWrapper>
     </NavbarContainer>
   );

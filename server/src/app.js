@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 
 const ordersRouter = require("./routes/orders.router");
 const productsRouter = require("./routes/products.router");
+const usersRouter = require("./routes/users.router");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 // routes which should handle requests
 app.use("/products", productsRouter);
 app.use("/orders", ordersRouter);
+app.use("/users", usersRouter);
 
 // error used if we don't find a matching route
 app.use((req, res, next) => {

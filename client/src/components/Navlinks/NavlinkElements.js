@@ -6,7 +6,9 @@ export const LinkContainer = styled(Link)`
 `;
 
 export const LinkWrapper = styled.div`
-  /* display: flex; */
-  /* justify-content: space-between; */
   color: white;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
