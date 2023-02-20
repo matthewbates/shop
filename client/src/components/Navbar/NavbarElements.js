@@ -6,6 +6,8 @@ export const NavbarContainer = styled.div`
   align-items: center;
   height: 80px;
   background: black;
+  position: sticky;
+  top: 0;
 `;
 
 export const NavbarItems = styled.div`
@@ -25,4 +27,10 @@ export const SidebarWrapper = styled.div`
   left: 0;
   position: fixed;
   z-index: ${({ open }) => (open ? 1 : -1)};
+`;
+
+export const NavlinksWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  
 `;

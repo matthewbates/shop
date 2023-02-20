@@ -1,15 +1,23 @@
-import React from "react";
-import { SidebarContainer } from "./SidebarElements";
+import React, { useEffect } from "react";
+import { SidebarWrapper, SidebarContainer } from "./SidebarElements";
 
-export default function Sidebar({ open }) {
+export default function Sidebar({ setOpen, open }) {
+  const viewportResize = (e) => {
+    if (e.target.innerWidth > 768) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", viewportResize);
+    return () => {
+      window.removeEventListener("resize", viewportResize);
+    };
+  }, []);
+
   return (
-    <SidebarContainer open={open}>
-      <div>
-        <a href="#">A</a>
-        <a href="#">B</a>
-        <a href="#">C</a>
-        <a href="#">D</a>
-      </div>
-    </SidebarContainer>
+    <SidebarWrapper>
+      <SidebarContainer open={open}></SidebarContainer>
+    </SidebarWrapper>
   );
 }

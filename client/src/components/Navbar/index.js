@@ -1,11 +1,7 @@
-import { useState } from "react";
-import {
-  NavbarContainer,
-  NavbarItems,
-  NavLinksWrapper,
-  SidebarWrapper,
-} from "./NavbarElements";
+import React, { useState } from "react";
+import { NavbarContainer, NavlinksWrapper } from "./NavbarElements";
 
+import Navlinks from "../Navlinks";
 import Burger from "../../components/Burger";
 import Sidebar from "../Sidebar";
 
@@ -19,9 +15,14 @@ export default function Navbar() {
   return (
     <NavbarContainer>
       <Burger open={open} toggle={handleClick} />
-      <SidebarWrapper>
-        <Sidebar open={open} />
-      </SidebarWrapper>
+      <Sidebar setOpen={setOpen} open={open} />
+      <NavlinksWrapper>
+        <Navlinks title="home">Home</Navlinks>
+        <Navlinks title="products">Products</Navlinks>
+        <Navlinks title="test">Test</Navlinks>
+        <Navlinks title="test">Test</Navlinks>
+        <Navlinks title="test">Test</Navlinks>
+      </NavlinksWrapper>
     </NavbarContainer>
   );
 }
