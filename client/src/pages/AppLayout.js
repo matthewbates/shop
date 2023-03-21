@@ -1,8 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// import useProducts from "../hooks/useProducts";
-
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -14,16 +12,14 @@ export default function AppLayout() {
 
   return (
     <div>
-      <Navbar />
-      {/* <Router>
-        <Routes> */}
-      <Home />
-      <Products />
-      {/* <Route exact path="/" element={<Home />} />
-          <Route exact path="/products" element={<Products products={products} />} /> */}
-      {/* </Routes>
-      </Router> */}
-      <Footer />
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+        </Routes>
+        {/* <Footer /> */}
+      </Router>
     </div>
   );
 }

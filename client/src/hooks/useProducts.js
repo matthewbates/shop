@@ -1,25 +1,37 @@
-// import { useState, useEffect, useCallback } from "react";
-// import { httpGetProducts } from "./requests";
+import { useState, useEffect, useCallback } from "react";
 
-// const useProducts = () => {
-//   const [products, setProducts] = useState([]);
+const API_URL = "http://localhost:8000";
 
-//   const getProducts = useCallback(async () => {
-//     const fetchedProducts = await httpGetProducts();
-//     setProducts(fetchedProducts);
-//   }, []);
+const useProducts = () => {
+  const [products, setProducts] = useState([]);
 
-//   // async function getProducts() {
-//   //   const fetchedProducts = await httpGetProducts();
-//   //   setProducts(fetchedProducts);
-//   // }
+  const httpGetProducts = () => {
+    const response = fetch(`${API_URL}/products`);
+    return response.json();
+  };
 
-//   useEffect(() => {
-//     // invoke getProducts - only needs to happen once
-//     getProducts();
-//   }, [getProducts]);
+  useEffect(() => {
+    fetch(`${API_URL}/products`)
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
 
-//   return products;
-// };
+  // const getProducts = useCallback(async () => {
+  //   const fetchedProducts = await httpGetProducts();
+  //   setProducts(fetchedProducts);
+  // }, []);
 
-// export default useProducts;
+  // async function getProducts() {
+  //   const fetchedProducts = await httpGetProducts();
+  //   setProducts(fetchedProducts);
+  // }
+
+  // useEffect(() => {
+  //   getProducts();
+  // }, [getProducts]);
+
+  return products;
+  console.log(products);
+};
+
+export default useProducts;
